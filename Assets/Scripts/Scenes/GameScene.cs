@@ -11,9 +11,6 @@ namespace Scenes
 {
     public class GameScene : Scene
     {
-        public GameMap GameMap => _gameMap;
-        private GameMap _gameMap;
-
         public bool RenderRequired => _renderRequired;
         private bool _renderRequired;
         private GameState _gameState;
@@ -23,6 +20,9 @@ namespace Scenes
             Engine.E.Map = GenerateMap(100,100);
             _renderRequired = true;
             _gameState = GameState.PLAYER_TURN;
+            Engine.E.MessageLog.AddMessage($"Player has entered the dungeon!");
+            Engine.E.MessageLog.AddMessage($"Another message.");
+
         }
 
         public override void Exit()

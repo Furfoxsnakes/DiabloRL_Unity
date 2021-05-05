@@ -126,6 +126,7 @@ namespace Actors
         public virtual void TakeDamage(int amount)
         {
             Stats[StatTypes.HEALTH] -= amount;
+            Engine.E.MessageLog.AddMessage($"{Name} tooks {amount} damage.");
             if (Stats[StatTypes.HEALTH] <= 0)
                 Die();
         }

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Systems;
 using Actors;
 using Cartography;
 using Common;
@@ -19,6 +20,7 @@ public class Engine : RB.IRetroBlitGame
 
     public GameMap Map;
     public Player Player;
+    public MessageLog MessageLog;
 
     public Scene CurrentScene
     {
@@ -49,6 +51,7 @@ public class Engine : RB.IRetroBlitGame
         E = this;
         A = new Assets();
         I = new InputManager();
+        MessageLog = new MessageLog();
         CurrentScene = new GameScene();
         return true;
     }

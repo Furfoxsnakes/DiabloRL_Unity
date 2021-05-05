@@ -255,6 +255,7 @@
      <Compile Include="Assets\Scripts\Enums\StatTypes.cs" />
      <Compile Include="Assets\Scripts\Common\Notification Center\NotificationExtensions.cs" />
      <Compile Include="Assets\Scripts\Common\Notification Center\NotificationCenter.cs" />
+     <Compile Include="Assets\Scripts\Systems\MessageLog.cs" />
      <None Include="Assets\RetroBlit\Resources\Demos\SuperFlagRun\Music\LICENSE.txt" />
      <None Include="Assets\RetroBlit\Resources\Demos\RetroDungeoneer\Music\LICENSE.txt" />
      <None Include="Assets\RetroBlit\Internal\Materials\PresentBasicShader.shader" />

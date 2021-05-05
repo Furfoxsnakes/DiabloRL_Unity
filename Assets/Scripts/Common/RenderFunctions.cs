@@ -44,6 +44,17 @@ namespace Common
             }
         }
 
+        private static void RenderMessageLog()
+        {
+            var messageLog = Engine.E.MessageLog;
+            var yPos = RB.DisplaySize.height - 80;
+            var xPos = 4;
+            for (var i = 0; i < messageLog.Lines.Length; i++)
+            {
+                RB.Print(new Vector2i(xPos, yPos + i * 8), Color.white, messageLog.Lines[i]);
+            }
+        }
+        
         private static void RenderUI(Player player)
         {
             var cameraPos = RB.CameraGet();
@@ -53,6 +64,8 @@ namespace Common
             var barPos = new Vector2i(4, 4);
             RenderBar(barPos, barSize, player.Stats[StatTypes.HEALTH], player.Stats[StatTypes.MAX_HEALTH], C.HealthBarFG, C.HealthBarBG);
             RB.Print(new Rect2i(barPos.x, barPos.y, barSize.width, barSize.height), Color.white, RB.ALIGN_H_CENTER | RB.ALIGN_V_CENTER, $"HP: {player.Stats[StatTypes.HEALTH]}/{player.Stats[StatTypes.MAX_HEALTH]}");
+            
+            RenderMessageLog();
 
             RB.CameraSet(cameraPos);
         }
