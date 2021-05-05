@@ -132,7 +132,7 @@ namespace Actors
 
         public virtual void Die()
         {
-            Debug.Log($"{this} has died.");
+            
         }
     }
 }

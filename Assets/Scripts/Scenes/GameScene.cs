@@ -64,7 +64,7 @@ namespace Scenes
             if (_renderRequired)
             {
                 CenterCameraOnActor(Engine.E.Player);
-                RenderFunctions.RenderAll();
+                RenderFunctions.RenderAll(Engine.E.Player);
                 _renderRequired = false;
             }
         }

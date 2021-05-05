@@ -36,7 +36,6 @@ namespace Actors
         private void OnHealthChanged(object sender, object args)
         {
             var stats = sender as Stats;
-            Debug.Log(stats.Parent);
         }
 
         private void OnPlayerMove(object sender, ItemMovedEventArgs<IGameObject> e)

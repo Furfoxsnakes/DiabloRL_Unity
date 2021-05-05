@@ -8,10 +8,11 @@ namespace Common
 {
     public class RenderFunctions
     {
-        public static void RenderAll()
+        public static void RenderAll(Player player)
         {
             RB.Clear(Color.black);
             RenderMap(Engine.E.Map);
+            RenderUI(player);
         }
 
         private static void RenderMap(GameMap map)
@@ -41,20 +42,29 @@ namespace Common
                 RB.DrawSprite(actor.SpriteID, new Vector2i(actor.Position.X * C.TILE_SIZE, actor.Position.Y * C.TILE_SIZE));
 
             }
+        }
+
+        private static void RenderUI(Player player)
+        {
+            var cameraPos = RB.CameraGet();
+            RB.CameraReset();
             
-            // foreach (var pos in map.Positions())
-            // {
-            //     if (!map.Explored[pos]) continue;
-            //
-            //
-            //     var actor = map.GetEntity<Actor>(pos);
-            //
-            //     if (actor == null) continue;
-            //
-            //     //TODO: Will need to specify enemy or player layer in the future
-            //     RB.DrawMapLayer((int)MapLayers.PLAYER);
-            //     RB.DrawSprite(actor.SpriteID, new Vector2i(pos.X * C.TILE_SIZE, pos.Y * C.TILE_SIZE));
-            // }
+            var barSize = new Vector2i(96, 12);
+            var barPos = new Vector2i(4, 4);
+            RenderBar(barPos, barSize, player.Stats[StatTypes.HEALTH], player.Stats[StatTypes.MAX_HEALTH], C.HealthBarFG, C.HealthBarBG);
+            RB.Print(new Rect2i(barPos.x, barPos.y, barSize.width, barSize.height), Color.white, RB.ALIGN_H_CENTER | RB.ALIGN_V_CENTER, $"HP: {player.Stats[StatTypes.HEALTH]}/{player.Stats[StatTypes.MAX_HEALTH]}");
+
+            RB.CameraSet(cameraPos);
+        }
+
+        private static void RenderBar(Vector2i pos, Vector2i size, int value, int maxvalue, Color32 barColour,
+            Color32 backColor)
+        {
+            var barWidth = (int)((float) value / maxvalue * size.width);
+            // draw background bar
+            RB.DrawRectFill(new Rect2i(pos, size), backColor);
+            // draw foreground bar
+            RB.DrawRectFill(new Rect2i(pos, barWidth, size.height), barColour);
         }
     }
 }
