@@ -51,7 +51,11 @@ namespace Common
             var xPos = 4;
             for (var i = 0; i < messageLog.Lines.Length; i++)
             {
-                RB.Print(new Vector2i(xPos, yPos + i * 8), Color.white, messageLog.Lines[i]);
+                var message = messageLog.Lines[i];
+                // dropshadow
+                RB.Print(new Vector2i(xPos + 1, yPos + i * 8 + 1), Color.black, RB.NO_INLINE_COLOR, message);
+                // actual message
+                RB.Print(new Vector2i(xPos, yPos + i * 8), Color.white, message);
             }
         }
         
