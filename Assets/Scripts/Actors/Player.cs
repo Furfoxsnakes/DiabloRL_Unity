@@ -29,13 +29,13 @@ namespace Actors
             Moved += OnPlayerMove;
             Stats[StatTypes.MAX_HEALTH] = 10;
             Stats[StatTypes.HEALTH] = 10;
+            Stats[StatTypes.MAX_MANA] = 5;
+            Stats[StatTypes.MANA] = 5;
+            Stats[StatTypes.ATTACK] = 2;
+            Stats[StatTypes.ATTACK_CHANCE] = 60;
+            Stats[StatTypes.DEFENSE] = 2;
+            Stats[StatTypes.DEFENSE_CHANCE] = 40;
             Stats[StatTypes.AWARENESS] = 4;
-            this.AddObserver(OnHealthChanged, Stats.StatChangedNotification(StatTypes.HEALTH));
-        }
-
-        private void OnHealthChanged(object sender, object args)
-        {
-            var stats = sender as Stats;
         }
 
         private void OnPlayerMove(object sender, ItemMovedEventArgs<IGameObject> e)
@@ -47,7 +47,7 @@ namespace Actors
         public override void OnMapChanged(Map newMap)
         {
             base.OnMapChanged(newMap);
-            AddComponent(new AttackAction((GameMap)newMap, 1, 5));
+            AddComponent(new AttackAction((GameMap)newMap, 1, Stats));
         }
     }
 }

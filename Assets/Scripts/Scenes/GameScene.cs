@@ -6,6 +6,7 @@ using GoRogue;
 using GoRogue.GameFramework;
 using GoRogue.MapGeneration;
 using GoRogue.MapViews;
+using UnityEngine;
 
 namespace Scenes
 {
@@ -13,16 +14,34 @@ namespace Scenes
     {
         public bool RenderRequired => _renderRequired;
         private bool _renderRequired;
+
+        public GameState GameState
+        {
+            get => _gameState;
+            set
+            {
+                _previousState = _gameState;
+                _gameState = value;
+            }
+        }
         private GameState _gameState;
+        private GameState _previousState;
+        private Menu _playerMenu;
+        private Menu _currentMenu;
+        private Player _player => Engine.E.Player;
+
+        public GameScene()
+        {
+        }
         
         public override void Enter()
         {
             Engine.E.Map = GenerateMap(100,100);
-            _renderRequired = true;
-            _gameState = GameState.PLAYER_TURN;
+            // _renderRequired = true;
             Engine.E.MessageLog.AddMessage($"Player has entered the dungeon!");
             Engine.E.MessageLog.AddMessage($"Another message.");
-
+            _playerMenu = new PlayerStatsMenu(_player);
+            _gameState = GameState.PLAYER_TURN;
         }
 
         public override void Exit()
@@ -32,41 +51,82 @@ namespace Scenes
 
         public override void Update()
         {
-            if (_gameState == GameState.PLAYER_TURN)
+            switch (GameState)
             {
-                if (!RB.AnyKeyPressed()) return;
-
-                var keyPressed = Helpers.GetPressedKeyCode();
-
-                var didAct = Engine.I.HandleInput(keyPressed);
-
-                if (didAct)
+                case GameState.PLAYER_TURN:
                 {
-                    _renderRequired = true;
-                    _gameState = GameState.ENEMY_TURN;
-                }
-            }
+                    var result = HandleKeyboard();
 
-            if (_gameState == GameState.ENEMY_TURN)
-            {
-                foreach (var actor in Engine.E.Map.Actors)
+                    switch (result)
+                    {
+                        case Results.MOVED:
+                        {
+                            // _renderRequired = true;
+                            // RenderFunctions.RenderAll(_player);
+                            GameState = GameState.ENEMY_TURN;
+                            break;
+                        }
+                        case Results.WAIT:
+                        {
+                            Engine.E.MessageLog.AddMessage($"Player has waited a turn.");
+                            // _renderRequired = true;
+                            GameState = GameState.ENEMY_TURN;
+                            break;
+                        }
+                        case Results.CHARACTER_MENU:
+                        {
+                            GameState = GameState.PLAYER_MENU;
+                            break;
+                        }
+                    }
+
+                    break;
+                }
+                case GameState.ENEMY_TURN:
                 {
-                    if (actor is Enemy enemy)
-                        enemy.Behaviour.Do(Engine.E.Player);
-                }
+                    foreach (var actor in Engine.E.Map.Actors)
+                    {
+                        if (actor is Enemy enemy)
+                            enemy.Behaviour.Do(Engine.E.Player);
+                    }
 
-                _gameState = GameState.PLAYER_TURN;
+                    GameState = GameState.PLAYER_TURN;
+                    break;
+                }
+                case GameState.PLAYER_MENU:
+                {
+                    var result = HandleKeyboard();
+
+                    switch (result)
+                    {
+                        case Results.ESCAPE:
+                        {
+                            // if (GameState != GameState.PLAYER_MENU) break;
+                            _currentMenu = null;
+                            GameState = _previousState;
+                            break;
+                        }
+                    }
+
+                    break;
+                }
             }
         }
 
         public override void Render()
         {
-            if (_renderRequired)
+            CenterCameraOnActor(Engine.E.Player);
+
+            switch (GameState)
             {
-                CenterCameraOnActor(Engine.E.Player);
-                RenderFunctions.RenderAll(Engine.E.Player);
-                _renderRequired = false;
+                case GameState.PLAYER_MENU:
+                {
+                    _currentMenu = _playerMenu;
+                    break;
+                }
             }
+            
+            RenderFunctions.RenderAll(Engine.E.Player, _currentMenu);
         }
 
         private GameMap GenerateMap(int width, int height)
@@ -89,7 +149,7 @@ namespace Scenes
 
             // spawn the player
             spawnPos = map.WalkabilityView.RandomPosition(validValue: true);
-            var player = new Player(spawnPos, "Player");
+            var player = new Player(spawnPos, "Chorfee");
             map.AddActor(player);
             Engine.E.Player = player;
 
@@ -108,6 +168,15 @@ namespace Scenes
 
         private IGameObject SpawnTerrain(Coord pos, bool isWalkable) 
             => isWalkable ? TerrainFactory.Floor(pos) : TerrainFactory.Wall(pos);
+
+        private Results HandleKeyboard()
+        {
+            if (!RB.AnyKeyPressed()) return Results.NONE;
+
+            var keyPressed = Helpers.GetPressedKeyCode();
+
+            return Engine.I.HandleInput(keyPressed, GameState);
+        }
 
     }
 }

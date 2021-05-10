@@ -4,6 +4,8 @@
     {
         PLAYER_TURN,
         ENEMY_TURN,
-        PLAYER_DEAD
+        PLAYER_DEAD,
+        PLAYER_MENU,
+        INVALID
     }
 }

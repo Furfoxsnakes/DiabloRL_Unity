@@ -8,11 +8,11 @@ namespace Common
 {
     public class RenderFunctions
     {
-        public static void RenderAll(Player player)
+        public static void RenderAll(Player player, Menu menu = null)
         {
             RB.Clear(Color.black);
             RenderMap(Engine.E.Map);
-            RenderUI(player);
+            RenderUI(player, menu);
         }
 
         private static void RenderMap(GameMap map)
@@ -59,7 +59,7 @@ namespace Common
             }
         }
         
-        private static void RenderUI(Player player)
+        private static void RenderUI(Player player, Menu menu)
         {
             var cameraPos = RB.CameraGet();
             RB.CameraReset();
@@ -70,6 +70,8 @@ namespace Common
             RB.Print(new Rect2i(barPos.x, barPos.y, barSize.width, barSize.height), Color.white, RB.ALIGN_H_CENTER | RB.ALIGN_V_CENTER, $"HP: {player.Stats[StatTypes.HEALTH]}/{player.Stats[StatTypes.MAX_HEALTH]}");
             
             RenderMessageLog();
+            
+            menu?.Render();
 
             RB.CameraSet(cameraPos);
         }

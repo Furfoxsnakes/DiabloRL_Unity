@@ -9,5 +9,7 @@ namespace Common
 
         public static readonly Color32 HealthBarFG = new Color32(220, 20, 60, 255);
         public static readonly Color32 HealthBarBG = new Color32(220, 20, 60, 127);
+
+        public static Color32 MenuBG = new Color32(0, 0, 0, 127);
     }
 }

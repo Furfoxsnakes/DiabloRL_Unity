@@ -13,7 +13,7 @@ namespace Actors.Behaviours
         public MoveAndAttackBehaviour(Enemy owner, GameMap map) : base(owner)
         {
             owner.AddComponent(new MoveAction(map));
-            owner.AddComponent(new AttackAction(map, 1,1));
+            owner.AddComponent(new AttackAction(map, 1,owner.Stats));
             _map = map;
         }
 

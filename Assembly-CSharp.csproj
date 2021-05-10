@@ -47,12 +47,14 @@
      <Compile Include="Assets\RetroBlit\Scripts\Demos\BrickBust\Global.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\DemoReel\SceneTMXProps.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\DemoReel\SceneText.cs" />
-     <Compile Include="Assets\Scripts\Common\InputManager.cs" />
+     <Compile Include="Assets\Scripts\Common\Components\Stats.cs" />
+     <Compile Include="Assets\Scripts\Systems\InputManager.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\RBAsset.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\Components\Inventory.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\DemoReel\Button.cs" />
      <Compile Include="Assets\Scripts\Common\Assets.cs" />
      <Compile Include="Assets\RetroBlit\Internal\Scripts\Asset\RBAssetManager.cs" />
+     <Compile Include="Assets\Scripts\Systems\MessageLog.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\StressTest\SceneEllipseStress.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\ShaderAsset.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\DemoReel\DemoReel.cs" />
@@ -92,6 +94,8 @@
      <Compile Include="Assets\Scripts\Scenes\Scene.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\SuperFlagRun\PlatformPhysics.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\SuperFlagRun\EntityMovable.cs" />
+     <Compile Include="Assets\Scripts\Enums\Results.cs" />
+     <Compile Include="Assets\Scripts\Common\PlayerStatsMenu.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\StressTest\ScenePrimitiveTest.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\StressTest\Button.cs" />
      <Compile Include="Assets\RetroBlit\Internal\Scripts\Render\RBRenderer.cs" />
@@ -122,6 +126,7 @@
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\MapObjects\Tile.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\Entity\EntityStore.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\DemoReel\DemoUtil.cs" />
+     <Compile Include="Assets\Scripts\Common\Notification Center\NotificationExtensions.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\Enums.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\GameCamera.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\Effects\EffectThrow.cs" />
@@ -147,6 +152,7 @@
      <Compile Include="Assets\RetroBlit\Scripts\Demos\BrickBust\LevelDef.cs" />
      <Compile Include="Assets\Scripts\Interfaces\IActor.cs" />
      <Compile Include="Assets\Scripts\Cartography\TerrainFactory.cs" />
+     <Compile Include="Assets\Scripts\Enums\StatTypes.cs" />
      <Compile Include="Assets\RetroBlit\Internal\Scripts\Util\RBPerf.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\DemoReel\SceneInput.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\DemoReel\DemoReelEntry.cs" />
@@ -159,6 +165,7 @@
      <Compile Include="Assets\Scripts\Actors\Behaviours\MoveAndAttackBehaviour.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\SuperFlagRun\EntityPlayer.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\Scene\Scene.cs" />
+     <Compile Include="Assets\Scripts\Common\Menu.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\RandomUtils.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\Effects\EffectLightning.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\SoundBank.cs" />
@@ -202,6 +209,7 @@
      <Compile Include="Assets\RetroBlit\Scripts\Demos\RetroDungeoneer\Effects\EffectFlame.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\BrickBust\Wall.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\SuperFlagRun\EntityFlagSlot.cs" />
+     <Compile Include="Assets\Scripts\Common\Notification Center\NotificationCenter.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\DemoReel\SceneEffectApply.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Rect2i.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\OldDays\CeilingFan.cs" />
@@ -251,11 +259,6 @@
      <Compile Include="Assets\RetroBlit\Scripts\TMXMapAsset.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\Demos\BrickBust\Level.cs" />
      <Compile Include="Assets\RetroBlit\Scripts\RetroBlitExtensions.cs" />
-     <Compile Include="Assets\Scripts\Common\Components\Stats.cs" />
-     <Compile Include="Assets\Scripts\Enums\StatTypes.cs" />
-     <Compile Include="Assets\Scripts\Common\Notification Center\NotificationExtensions.cs" />
-     <Compile Include="Assets\Scripts\Common\Notification Center\NotificationCenter.cs" />
-     <Compile Include="Assets\Scripts\Systems\MessageLog.cs" />
      <None Include="Assets\RetroBlit\Resources\Demos\SuperFlagRun\Music\LICENSE.txt" />
      <None Include="Assets\RetroBlit\Resources\Demos\RetroDungeoneer\Music\LICENSE.txt" />
      <None Include="Assets\RetroBlit\Internal\Materials\PresentBasicShader.shader" />
